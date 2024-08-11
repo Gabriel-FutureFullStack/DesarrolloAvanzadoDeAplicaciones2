@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageDto;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageable;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesSorting;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Clientes;
@@ -34,19 +34,12 @@ public class ClientesService {
         return cRepository.findAllActiveClientes(userSorting);
     }
 
-    public ClientesPageDto getAllPageable(ClientesPageable pageable){
-            Pageable clientesPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-            Page<Clientes> clientesPage = cRepository.findAllPageableActiveClientes(clientesPageable);
-            return new ClientesPageDto((int)clientesPage.getTotalElements(), 
-                                            clientesPage.getTotalPages(), 
-                                            pageable.getPageNumber(), 
-                                            pageable.getPageSize(),
-                                            clientesPage.getContent());
+    public Page<Clientes> getAllPageable(ClientesPageable pageable){
+            Sort clienteSorting = Sort.by(pageable.getDirection().equals("asc")? Direction.ASC:Direction.DESC,pageable.getColumnOrder());
+            Pageable clientesPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), clienteSorting);
+            return cRepository.findAllPageableActiveClientes(clientesPageable, pageable.getFilter());
             
-    }
-
-    public Page<Clientes> getAllPageableActiveUsers(Pageable pageable) {
-            return cRepository.findAllPageableActiveClientes(pageable);
+            
     }
 
     

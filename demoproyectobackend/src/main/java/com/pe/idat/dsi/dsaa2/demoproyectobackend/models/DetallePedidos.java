@@ -35,4 +35,7 @@ public class DetallePedidos {
 
     @Column(name = "precio_unitario")
     private double precioUnitario;
+
+    @Column(name = "estado")
+    private String estado;
 }

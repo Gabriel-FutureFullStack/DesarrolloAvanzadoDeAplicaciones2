@@ -2,6 +2,10 @@ package com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Clientes;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,16 +13,13 @@ import lombok.Data;
 @Data
 public class ClientesPageableResponse {
     private int totalItems;
-    private int pageNumber;
     private int totalPages;
-    private int pageSize;
+    
     private List<ClientesPageableItemResponse> items;
 
-    public static ClientesPageableResponse toClientesPageableResponse(ClientesPageDto clientesPDto){
-        return new ClientesPageableResponse(clientesPDto.getTotalItems(), 
-                                            clientesPDto.getPageNumber(), 
+    public static ClientesPageableResponse toClientesPageableResponse(Page<Clientes> clientesPDto){
+        return new ClientesPageableResponse((int)clientesPDto.getTotalElements(), 
                                             clientesPDto.getTotalPages(), 
-                                            clientesPDto.getPageSize(), 
-                                        clientesPDto.getItems().stream().map(ClientesPageableItemResponse::toClientesPageableItemResponse).toList());
+                                            clientesPDto.getContent().stream().map(ClientesPageableItemResponse::toClientesPageableItemResponse).toList());
                                         }
 }

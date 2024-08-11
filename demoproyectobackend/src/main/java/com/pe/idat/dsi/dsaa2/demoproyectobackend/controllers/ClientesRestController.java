@@ -2,6 +2,7 @@ package com.pe.idat.dsi.dsaa2.demoproyectobackend.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesGetByIdResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesInsertResponse;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageDto;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageable;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageableResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesSorting;
@@ -25,7 +26,7 @@ import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesUpdateRequ
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesUpdateResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Clientes;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.ClientesService;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 @RestController
@@ -47,10 +48,11 @@ public class ClientesRestController {
     public ResponseEntity<ClientesPageableResponse> getAllPageable(@RequestParam( required = false, defaultValue = "0") int pageNumber, 
                                                                 @RequestParam(required = false, defaultValue = "10") int pageSize,
                                                                 @RequestParam( required = false, defaultValue = "asc") String direction, 
-                                                                @RequestParam(required = false, defaultValue = "id") String columnOrder) 
+                                                                @RequestParam(required = false, defaultValue = "id") String columnOrder,
+                                                                @RequestParam(required = false, defaultValue = "") String filter)  
     {
-        ClientesPageable pageable = new ClientesPageable(pageNumber, pageSize, columnOrder, direction);
-        ClientesPageDto response = clientesService.getAllPageable(pageable);
+        ClientesPageable pageable = new ClientesPageable(pageNumber, pageSize, columnOrder, direction,filter);
+        Page<Clientes> response = clientesService.getAllPageable(pageable);
 
         if(response == null){
             return ResponseEntity.badRequest().build();
