@@ -1,0 +1,48 @@
+<mat-toolbar class="justify-content-between mat-elevation-z8">
+  <button mat-icon-button class="menu" aria-label="menu" (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>{{title}}</span>
+  <div>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="cuenta" aria-label="cuenta">
+          <mat-icon>person</mat-icon>
+      </button>
+      <button mat-icon-button class="acceso" aria-label="acceso">
+          <mat-icon>login</mat-icon>
+      </button>
+  </div>
+</mat-toolbar>
+
+<hr>
+
+<mat-drawer-container class="master-container" autosize>
+  <mat-drawer #drawer mode="side">
+      <mat-selection-list>
+          <div mat-subheader>Menu</div>
+          @for (item of menu; track item) {
+            <mat-list-item (click)="redirectTo(item.path)" >
+              <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+              <div matListItemTitle>{{item.name}}</div>
+            </mat-list-item>
+          }
+        </mat-selection-list>
+
+      @if (showFiller) {
+      <p>hola</p>
+      }
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+          Herramientas extra
+      </button>
+
+  </mat-drawer>
+  
+  <div>
+      <h2>Title</h2>
+      <router-outlet />
+  </div>
+
+</mat-drawer-container>
+
+ 
