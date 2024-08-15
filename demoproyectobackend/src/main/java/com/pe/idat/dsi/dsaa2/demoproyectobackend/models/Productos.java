@@ -28,6 +28,25 @@ public class Productos {
     private double precio;
     @Column(name = "stock")
     private int stock;
+    @Column(name="estado")
+    private String estado;
+
+    public Productos(Long productoId, String nombreProducto, String descripcion, double precio, int stock) {
+        this.productoId = productoId;
+        this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
+        this.estado = estado;
+    }
+    public Productos updatePropierties(Productos model){
+        nombreProducto = model.nombreProducto;
+        descripcion = model.descripcion;
+        precio =model.precio;
+        stock = model.stock;
+        return this;
+
+    }
 
 
 }

@@ -7,10 +7,10 @@ import com.pe.idat.dsi.dsaa2.demoproyectobackend.repositories.PedidosRepository;
 @Service
 public class PedidosService {
 
-    private PedidosRepository pRepository;
+    private PedidosRepository peRepository;
     
-    public PedidosService(PedidosRepository pRepository){
-        this.pRepository = pRepository;
+    public PedidosService(PedidosRepository peRepository){
+        this.peRepository = peRepository;
     }
 
 }
