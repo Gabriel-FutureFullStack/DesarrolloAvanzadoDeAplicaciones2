@@ -32,4 +32,16 @@ public class Pedidos {
 
     @Column(name = "total")
     private double total;
+
+    @Column(name = "estado")
+    private String estado;
+
+    public Pedidos(Long pedidoId, Clientes cliente, Date fecha, double total) {
+        this.pedidoId = pedidoId;
+        this.cliente = cliente;
+        this.fecha = fecha;
+        this.total = total;
+    }
+
+    
 }

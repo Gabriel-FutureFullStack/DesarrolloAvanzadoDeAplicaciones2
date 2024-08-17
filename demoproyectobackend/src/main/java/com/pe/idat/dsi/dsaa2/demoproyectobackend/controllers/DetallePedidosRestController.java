@@ -11,9 +11,12 @@ import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetallePagea
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleSorting;
 
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.DetallePedidos;
-
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Pedidos;
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Productos;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.DetallePedidosService;
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.PedidosService;
 
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.ProductosService;
 
 import java.util.List;
 
@@ -33,9 +36,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("api/v1/detalle-pedidos")
 public class DetallePedidosRestController {
     private DetallePedidosService detallePedidosService;
+    private PedidosService pedidosService;
+    private ProductosService productosService;
 
-    public DetallePedidosRestController(DetallePedidosService detallePedidosService){
+    public DetallePedidosRestController(DetallePedidosService detallePedidosService, PedidosService pedidosService, ProductosService productosService){
         this.detallePedidosService = detallePedidosService;
+        this.pedidosService = pedidosService;
+        this.productosService = productosService;
     }
 
     @GetMapping()
@@ -73,11 +80,15 @@ public class DetallePedidosRestController {
     public ResponseEntity<DetalleInsertResponse> insertDetalle(@RequestBody DetalleInsertRequest entity) {
         
         try{
+            Pedidos pedido = pedidosService.getById(entity.getPedidoId());
+            Productos producto = productosService.getById(entity.getProductoId());
+            entity.setEstado("1");
+            entity.setPrecioUnitario(productosService.getById(entity.getProductoId()).getPrecio());
             //Convertir DTO a entidad relacional 
-            DetallePedidos detalle = entity.toDetallePedidos();
+            DetallePedidos detalle = entity.toDetallePedidos(pedido,producto);
             DetallePedidos saveDetalle = detallePedidosService.insertDetalle(detalle);
             
-            if(saveDetalle == null || detalle.getDetalleId() == 0){
+            if(saveDetalle == null || saveDetalle.getDetalleId() == 0){
                 return ResponseEntity.badRequest().build();
             }
             return ResponseEntity.ok(DetalleInsertResponse.toDetalleInsertResponse(saveDetalle));

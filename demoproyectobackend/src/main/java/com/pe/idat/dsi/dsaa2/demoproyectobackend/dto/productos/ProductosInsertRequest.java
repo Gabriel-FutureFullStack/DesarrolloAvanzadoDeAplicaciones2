@@ -1,6 +1,5 @@
 package com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.productos;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Clientes;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Productos;
 
 import lombok.AllArgsConstructor;
