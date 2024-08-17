@@ -38,4 +38,14 @@ public class DetallePedidos {
 
     @Column(name = "estado")
     private String estado;
+
+    public DetallePedidos(Long detalleId, Pedidos pedido, Productos producto, int cantidad, double precioUnitario) {
+        this.detalleId = detalleId;
+        this.pedido = pedido;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precioUnitario = precioUnitario;
+    }
+
+    
 }

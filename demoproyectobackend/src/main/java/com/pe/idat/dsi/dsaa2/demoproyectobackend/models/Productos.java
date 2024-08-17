@@ -37,7 +37,7 @@ public class Productos {
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
-        this.estado = estado;
+        
     }
     public Productos updatePropierties(Productos model){
         nombreProducto = model.nombreProducto;
@@ -47,6 +47,7 @@ public class Productos {
         return this;
 
     }
+    
 
 
 }

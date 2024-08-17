@@ -37,7 +37,6 @@ public class Clientes {
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
-        this.estado = estado;
     }
     public Clientes updatePropierties(Clientes model){
         nombreCliente = model.nombreCliente;

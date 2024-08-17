@@ -1,12 +1,12 @@
-package com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes;
+package com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ClientesPageable {
-    
+public class DetallePageable {
+
     private int pageNumber;
     private int pageSize;
     private String columnOrder;
