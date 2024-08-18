@@ -5,26 +5,13 @@
 
   <span>{{title}}</span>
   <div>
-
-    <button mat-icon-button [matMenuTriggerFor]="userMenu" class="cuenta" aria-label="cuenta">
-      <mat-card-header>
-        <div mat-card-avatar class="header-usuario user-avatar"></div>
-      </mat-card-header>
-    </button>
-    <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="redirectTo('settings')">
-        <mat-icon>settings</mat-icon>
-        Opciones
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="cuenta" aria-label="cuenta">
+          <mat-icon>person</mat-icon>
       </button>
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        Salir
+      <button mat-icon-button class="acceso" aria-label="acceso">
+          <mat-icon>login</mat-icon>
       </button>
-      <button mat-menu-item (click)="redirectTo('login')">
-        <mat-icon>login</mat-icon>
-        Login
-      </button>
-    </mat-menu>
   </div>
 </mat-toolbar>
 
@@ -36,7 +23,7 @@
           <div mat-subheader>Menu</div>
           @for (item of menu; track item) {
             <mat-list-item (click)="redirectTo(item.path)" >
-              <mat-icon matListItemIcon >{{item.icon}}</mat-icon>
+              <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
               <div matListItemTitle>{{item.name}}</div>
             </mat-list-item>
           }
@@ -52,6 +39,7 @@
   </mat-drawer>
   
   <div>
+      <h2>Title</h2>
       <router-outlet />
   </div>
 
