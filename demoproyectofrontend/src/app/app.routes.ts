@@ -6,9 +6,14 @@ import { DetallesPedidosComponent } from './DetallePedidos/Components/detalles-p
 import { ProductosComponent } from './Productos/Components/productos/productos.component';
 import { ProductosCreateComponent } from './Productos/Components/productos-create/productos-create.component';
 import { ProductosEditComponent } from './Productos/Components/productos-edit/productos-edit.component';
+import { ConfiguracionComponent } from './Config/Components/configuracion/configuracion.component';
 
 export const routes: Routes = [
 
+    {
+        path: 'settings',
+        component: ConfiguracionComponent
+    },
     {
         path: 'clients',
         component: ClientesComponent
