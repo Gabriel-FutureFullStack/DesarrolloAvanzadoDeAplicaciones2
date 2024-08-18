@@ -3,20 +3,19 @@ package com.pe.idat.dsi.dsaa2.demoproyectobackend.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleGetByIDResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetallePageable;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetallePageableResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleSorting;
-
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleUpdateRequest;
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleUpdateResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.DetallePedidos;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Pedidos;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Productos;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.DetallePedidosService;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.PedidosService;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.ProductosService;
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.DetallePedidosService;
+
 
 import java.util.List;
 
@@ -24,11 +23,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -36,13 +38,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("api/v1/detalle-pedidos")
 public class DetallePedidosRestController {
     private DetallePedidosService detallePedidosService;
-    private PedidosService pedidosService;
-    private ProductosService productosService;
+    
 
-    public DetallePedidosRestController(DetallePedidosService detallePedidosService, PedidosService pedidosService, ProductosService productosService){
+    public DetallePedidosRestController(DetallePedidosService detallePedidosService){
         this.detallePedidosService = detallePedidosService;
-        this.pedidosService = pedidosService;
-        this.productosService = productosService;
     }
 
     @GetMapping()
@@ -79,24 +78,37 @@ public class DetallePedidosRestController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DetalleInsertResponse> insertDetalle(@RequestBody DetalleInsertRequest entity) {
         
-        try{
-            Pedidos pedido = pedidosService.getById(entity.getPedidoId());
-            Productos producto = productosService.getById(entity.getProductoId());
-            entity.setEstado("1");
-            entity.setPrecioUnitario(productosService.getById(entity.getProductoId()).getPrecio());
-            //Convertir DTO a entidad relacional 
-            DetallePedidos detalle = entity.toDetallePedidos(pedido,producto);
-            DetallePedidos saveDetalle = detallePedidosService.insertDetalle(detalle);
-            
-            if(saveDetalle == null || saveDetalle.getDetalleId() == 0){
+        try {
+            DetallePedidos saveDetalle = detallePedidosService.insertDetalle(entity);
+
+            if (saveDetalle == null || saveDetalle.getDetalleId() == 0) {
                 return ResponseEntity.badRequest().build();
             }
             return ResponseEntity.ok(DetalleInsertResponse.toDetalleInsertResponse(saveDetalle));
-        }
-        catch(Exception ex)
-        {        
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DetalleInsertResponse(null, null, null, 0, 0, "Ocurrió un error: " + ex.getMessage()));
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new DetalleInsertResponse(null, null, null, 0, 0, "Ocurrió un error: " + ex.getMessage()));
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DetalleUpdateResponse> updateDetalle(@PathVariable Long id, @RequestBody DetalleUpdateRequest entity) {
+        entity.setDetalleId(id);
+
+        DetallePedidos detalle = detallePedidosService.updaDetallePedidos(entity);
+        if(detalle == null || detalle.getDetalleId()== 0){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(DetalleUpdateResponse.toDetalleUpdateResponse(detalle));
+    }
+    @DeleteMapping("/{id}") 
+    public ResponseEntity<String> deleteDetalle(@PathVariable Long id)
+    {
+        boolean hasDeleted = detallePedidosService.deleteDetalle(id);
+        if(!hasDeleted){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok( "El detalle ha sido eliminado correctamente");
+    } 
     
 }

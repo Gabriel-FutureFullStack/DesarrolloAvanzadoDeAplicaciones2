@@ -47,5 +47,18 @@ public class DetallePedidos {
         this.precioUnitario = precioUnitario;
     }
 
+    public DetallePedidos updatePropierties(DetallePedidos model)
+    {
+        pedido = model.pedido;
+        producto = model.producto;
+        cantidad = model.cantidad;
+        precioUnitario = model.precioUnitario;
+        return this;
+
+    }
+
+    
+    
+
     
 }

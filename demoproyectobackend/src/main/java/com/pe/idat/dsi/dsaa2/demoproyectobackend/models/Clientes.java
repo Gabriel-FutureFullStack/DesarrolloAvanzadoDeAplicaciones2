@@ -44,7 +44,6 @@ public class Clientes {
         email =model.email;
         telefono = model.telefono;
         return this;
-
     }
 
     
