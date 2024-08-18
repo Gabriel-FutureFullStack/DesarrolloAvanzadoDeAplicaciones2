@@ -12,6 +12,8 @@ public class ClientesInsertRequest {
     private Long clienteId;
     private String nombreCliente;
     private String direccion;
+    private String usuario;
+    private String clave;
     private String email;
     private String telefono;
     private String estado; 
@@ -21,7 +23,9 @@ public class ClientesInsertRequest {
             clientes.getClienteId(), 
             clientes.getNombreCliente(), 
             clientes.getDireccion(), 
-            clientes.getEmail(), 
+            clientes.getUsuario(),
+            clientes.getClave(),
+            clientes.getEmail(),
             clientes.getTelefono(), 
             clientes.getEstado()
         );                                  

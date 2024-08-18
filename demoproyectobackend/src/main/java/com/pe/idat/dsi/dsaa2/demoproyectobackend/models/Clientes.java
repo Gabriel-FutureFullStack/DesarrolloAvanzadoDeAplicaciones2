@@ -24,6 +24,10 @@ public class Clientes {
     private String nombreCliente;
     @Column(name = "direccion")
     private String direccion;
+    @Column(name = "username")
+    private String usuario;
+    @Column(name = "password")
+    private String clave;
     @Column(name = "email")
     private String email;
     @Column(name = "telefono")
@@ -31,10 +35,12 @@ public class Clientes {
     @Column(name = "estado")
     private String estado;
 
-    public Clientes(Long clienteId, String nombreCliente, String direccion, String email, String telefono) {
+    public Clientes(Long clienteId, String nombreCliente, String direccion, String email, String usuario, String clave, String telefono) {
         this.clienteId = clienteId;
         this.nombreCliente = nombreCliente;
         this.direccion = direccion;
+        this.usuario = usuario;
+        this.clave = clave;
         this.email = email;
         this.telefono = telefono;
     }
@@ -42,6 +48,8 @@ public class Clientes {
         nombreCliente = model.nombreCliente;
         direccion = model.direccion;
         email =model.email;
+        usuario = model.usuario;
+        clave = model.clave;
         telefono = model.telefono;
         return this;
     }
