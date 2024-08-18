@@ -30,9 +30,11 @@ export class ClientesEditComponent {
     this.cliente = { clienteId: 0 } as ClientesData;
     this.clientesForm = new FormGroup({
       nombreCliente: new FormControl( '', [Validators.required]),
-      direccion: new FormControl( '', [Validators.required]),
+      direccion: new FormControl('', [Validators.required]),
+      usuario: new FormControl('', [Validators.required]),
+      clave: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
-      telefono: new FormControl('', [Validators.required]),      
+      telefono: new FormControl('', [Validators.required])    
     }); 
   }
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class ClientesEditComponent {
         this.cliente = response;
         this.clientesForm.get('nombreCliente')?.setValue(response.nombreCliente);
         this.clientesForm.get('direccion')?.setValue(response.direccion);
+        this.clientesForm.get('usuario')?.setValue(response.usuario);
+        this.clientesForm.get('clave')?.setValue(response.clave);
         this.clientesForm.get('email')?.setValue(response.email);
         this.clientesForm.get('telefono')?.setValue(response.telefono);
         

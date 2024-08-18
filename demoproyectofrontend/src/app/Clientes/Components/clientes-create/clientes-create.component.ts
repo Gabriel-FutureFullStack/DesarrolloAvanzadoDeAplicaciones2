@@ -27,6 +27,8 @@ export class ClientesCreateComponent {
     this.clientesForm = new FormGroup({
       nombreCliente: new FormControl( '', [Validators.required]),
       direccion: new FormControl('', [Validators.required]),
+      usuario: new FormControl('', [Validators.required]),
+      clave: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
       telefono: new FormControl('', [Validators.required])
     })
