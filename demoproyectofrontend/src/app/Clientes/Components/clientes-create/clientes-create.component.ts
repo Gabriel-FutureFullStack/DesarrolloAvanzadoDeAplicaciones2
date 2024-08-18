@@ -21,7 +21,7 @@ import { ClientesData } from '../../Models/clientes-data';
 })
 export class ClientesCreateComponent {
   clientesForm: FormGroup;
-  title= "Agregar Estudiante";
+  title= "Agregar Cliente";
 
   constructor(private router: Router, private clientesService:ClientesService){
     this.clientesForm = new FormGroup({
