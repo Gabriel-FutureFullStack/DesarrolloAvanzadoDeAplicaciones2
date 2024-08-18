@@ -91,8 +91,8 @@ export class ClientesComponent implements OnInit, AfterViewInit{
     let deleteDialogRef = this.dialog.open(ItemDialogComponent, {
       width: '300px',
       data: {
-        title: 'Eliminar Estudiante',
-        message:`Esta seguro que desea eliminar el registro del estudiante ${cliente.clienteId} ${cliente.nombreCliente}?`
+        title: 'Eliminar Cliente',
+        message:`Esta seguro que desea eliminar el registro del cliente ${cliente.clienteId} ${cliente.nombreCliente}?`
       },
       
     });
@@ -104,12 +104,12 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       this.clienteService.delet(cliente.clienteId).
       subscribe(
         response => {
-          console.log('El usuario ha sido eliminado correctamente', response);
+          console.log('El cliente ha sido eliminado correctamente', response);
           //this.router.navigate(['/students'])
           window.location.reload();
         },
         error => {
-          console.log('Error eliminando al usuario', error);
+          console.log('Error eliminando al cliente', error);
         }
       )
     });

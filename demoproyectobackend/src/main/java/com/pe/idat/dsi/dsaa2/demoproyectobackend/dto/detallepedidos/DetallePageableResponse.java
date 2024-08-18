@@ -17,6 +17,7 @@ public class DetallePageableResponse {
     private List<DetallePageableItemResponse> items;
     public static DetallePageableResponse toDetallePageableResponse(Page<DetallePedidos> detallesPDto){
         return new DetallePageableResponse((int)detallesPDto.getTotalElements(),
-        detallesPDto.getTotalPages(), detallesPDto.getContent().stream().map(DetallePageableItemResponse::toDetallePageableItemResponse).toList());
+                                            detallesPDto.getTotalPages(), 
+                                    detallesPDto.getContent().stream().map(DetallePageableItemResponse::toDetallePageableItemResponse).toList());
     }
 }
