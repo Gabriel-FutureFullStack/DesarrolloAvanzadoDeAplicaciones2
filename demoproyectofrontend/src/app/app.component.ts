@@ -6,8 +6,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { Menu } from './Models/Menu';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
+
 
 @Component({
   selector: 'app-root',
@@ -18,8 +17,6 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatCardModule,
-    MatMenuModule 
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -34,19 +31,16 @@ export class AppComponent {
   
   populateMenu(){
     let menu: Menu[]=[
-      new Menu('Clientes', 'clients', 'groups'),
-      new Menu('Productos', 'products', 'inventory'),
-      new Menu('Pedidos', 'orders', 'local_shipping'),
-      new Menu('Detalle de Pedidos', 'details', 'shopping_cart'),
+      new Menu('Configuracion', 'settings', 'settings'),
+      new Menu('Clientes', 'clients', 'person'),
+      new Menu('Productos', 'productos', 'person'),
+      new Menu('Pedidos', 'orders', 'person'),
+      new Menu('Detalle de Pedidos', 'details', 'person'),
     ];
     return menu;
   }
   redirectTo(path: string){
     this.router.navigate([path]);
-  }
-  logout() {
-    // Lógica para cerrar sesión
-    console.log('Logout clicked');
   }
 
 }
