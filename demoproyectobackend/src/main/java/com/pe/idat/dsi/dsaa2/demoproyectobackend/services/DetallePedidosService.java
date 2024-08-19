@@ -59,6 +59,10 @@ public class DetallePedidosService {
         }
         return response.get();
     }
+
+
+
+
     public DetallePedidos insertDetalle(DetalleInsertRequest entity){
         // Obtén el Pedido y Producto usando los servicios
         Pedidos pedido = pedidosService.getById(entity.getPedidoId());

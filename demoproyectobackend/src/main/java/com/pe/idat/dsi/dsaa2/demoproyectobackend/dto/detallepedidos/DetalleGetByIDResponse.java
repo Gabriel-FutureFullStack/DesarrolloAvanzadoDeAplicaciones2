@@ -16,6 +16,8 @@ public class DetalleGetByIDResponse {
     private int cantidad;
     private double precioUnitario;
     private String estado;
+
+    
     public static DetalleGetByIDResponse toDetalleGetByIDResponse(DetallePedidos detallePedidos){
         return new DetalleGetByIDResponse(detallePedidos.getDetalleId(),
          detallePedidos.getPedido(),

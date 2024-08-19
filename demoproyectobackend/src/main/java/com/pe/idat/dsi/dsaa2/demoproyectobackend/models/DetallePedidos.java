@@ -1,7 +1,10 @@
 package com.pe.idat.dsi.dsaa2.demoproyectobackend.models;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,11 +24,11 @@ public class DetallePedidos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long detalleId;
-
+  
     @ManyToOne
     @JoinColumn(name = "pedido_id", nullable = false)
     private Pedidos pedido;
-
+    
     @ManyToOne
     @JoinColumn(name = "producto_id", nullable = false)
     private Productos producto;

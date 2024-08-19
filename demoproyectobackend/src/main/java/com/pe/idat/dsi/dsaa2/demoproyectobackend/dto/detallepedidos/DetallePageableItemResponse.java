@@ -29,4 +29,6 @@ public class DetallePageableItemResponse {
                                                 detalle.getEstado());
     }
 
+    
+
 }

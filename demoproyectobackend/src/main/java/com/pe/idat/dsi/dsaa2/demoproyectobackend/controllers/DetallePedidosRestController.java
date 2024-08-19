@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleGetByIDResponse;
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleGetByIdViewResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetallePageable;
@@ -74,6 +75,16 @@ public class DetallePedidosRestController {
         }
         return ResponseEntity.ok(DetalleGetByIDResponse.toDetalleGetByIDResponse(detalle));
     }
+
+    /*@GetMapping("/{id}")
+    public ResponseEntity<DetalleGetByIdViewResponse> getById(@PathVariable Long id) {
+    DetallePedidos detalle = detallePedidosService.getById(id);
+    if (detalle == null || detalle.getDetalleId() == 0) {
+        return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(DetalleGetByIdViewResponse.fromDetallePedidos(detalle));
+    }*/
+    
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DetalleInsertResponse> insertDetalle(@RequestBody DetalleInsertRequest entity) {

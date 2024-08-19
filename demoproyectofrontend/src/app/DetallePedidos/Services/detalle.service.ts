@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { DetalleSearchFilter } from '../Models/detalle-search-filter';
 import { DetallePage } from '../Models/detalle-page';
 import { Observable } from 'rxjs';
+import { DetalleData } from '../Models/detalle-data';
 
 
 @Injectable({
@@ -23,14 +24,19 @@ export class DetalleService {
     }
   }
 
+  getById(id: string): Observable<DetalleData>{
+    return this.httpdetalle.get<DetalleData>(`${this.apiUrlBasePath}detalle-pedidos/${id}`,this.httpOptions);
+  }
 
-  getAllPageable(filter: DetalleSearchFilter):Observable<DetallePage>{
+  getAllPageable(filter: DetalleSearchFilter, ):Observable<DetallePage>{
     let filterparams = new HttpParams()
     .set('pageNumber', filter.pageNumber)
     .set('pageSize', filter.pageSize)
     .set('columnOrder', filter.columnOrder)
     .set('direction', filter.direction)
     .set('filter', filter.filter)
+    
+
     
     return this.httpdetalle.get<DetallePage>(`${this.apiUrlBasePath}detalle-pedidos/page`, {params: filterparams, headers:this.httpOptions.headers});
   }
