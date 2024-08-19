@@ -22,7 +22,7 @@ import { ClientesService } from '../../Services/clientes.service';
 export class ClientesEditComponent {
   clientesForm: FormGroup;
   title = "Modificacion de Clientes";
-  id: string = "  0"; 
+  id: string = "0"; 
   cliente: ClientesData;
 
   
@@ -74,7 +74,6 @@ export class ClientesEditComponent {
     updateCliente.clienteId = Number(this.id);
     updateCliente.estado = "1";
     console.log(updateCliente);
-
     this.clientesService.update(updateCliente)
     .subscribe(
       response => {

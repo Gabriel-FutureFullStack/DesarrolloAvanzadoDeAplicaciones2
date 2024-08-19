@@ -4,6 +4,6 @@ export interface PedidosData{
     pedidoId: number;
     cliente: ClientesData;
     fecha:string;
-    total: string;
+    total: number;
     estado:string;
 }

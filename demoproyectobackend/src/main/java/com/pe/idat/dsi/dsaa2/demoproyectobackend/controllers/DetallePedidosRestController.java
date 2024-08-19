@@ -75,7 +75,7 @@ public class DetallePedidosRestController {
         }
         return ResponseEntity.ok(DetalleGetByIDResponse.toDetalleGetByIDResponse(detalle));
     }
-
+    
     /*@GetMapping("/{id}")
     public ResponseEntity<DetalleGetByIdViewResponse> getById(@PathVariable Long id) {
     DetallePedidos detalle = detallePedidosService.getById(id);

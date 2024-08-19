@@ -40,5 +40,8 @@ export class DetalleService {
     
     return this.httpdetalle.get<DetallePage>(`${this.apiUrlBasePath}detalle-pedidos/page`, {params: filterparams, headers:this.httpOptions.headers});
   }
+  update(detalle: DetalleData):Observable<DetalleData>{
+    return this.httpdetalle.put<DetalleData>(`${this.apiUrlBasePath}detalle-pedidos/${detalle.detalleId}`, detalle, this.httpOptions);
+  }
 
 }
