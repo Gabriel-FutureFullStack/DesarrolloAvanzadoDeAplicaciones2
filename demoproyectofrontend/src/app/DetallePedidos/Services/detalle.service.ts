@@ -28,7 +28,17 @@ export class DetalleService {
     return this.httpdetalle.get<DetalleData>(`${this.apiUrlBasePath}detalle-pedidos/${id}`,this.httpOptions);
   }
 
-  getAllPageable(filter: DetalleSearchFilter, ):Observable<DetallePage>{
+  getDetallesByCliente(clienteId: number, filter: DetalleSearchFilter ): Observable<DetallePage> {
+    let filterparams = new HttpParams()
+    .set('pageNumber', filter.pageNumber)
+    .set('pageSize', filter.pageSize)
+    .set('columnOrder', filter.columnOrder)
+    .set('direction', filter.direction)
+    .set('filter', filter.filter)
+    return this.httpdetalle.get<DetallePage>(`${this.apiUrlBasePath}detalle-pedidos/cliente/${clienteId}`, {params: filterparams, headers:this.httpOptions.headers});
+  }
+
+  getAllPageable(filter: DetalleSearchFilter ):Observable<DetallePage>{
     let filterparams = new HttpParams()
     .set('pageNumber', filter.pageNumber)
     .set('pageSize', filter.pageSize)

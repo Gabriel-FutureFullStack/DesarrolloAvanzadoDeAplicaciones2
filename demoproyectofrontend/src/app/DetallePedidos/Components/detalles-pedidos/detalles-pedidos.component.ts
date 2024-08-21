@@ -7,12 +7,19 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { Router, RouterModule } from '@angular/router';
-import { Item } from '../../Models/detalle-page';
+import { DetallePage, Item } from '../../Models/detalle-page';
 import { DetalleSearchFilter } from '../../Models/detalle-search-filter';
 import { MatDialog } from '@angular/material/dialog';
 import { DetalleService } from '../../Services/detalle.service';
 import { DetalleData } from '../../Models/detalle-data';
 import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-dialog.component';
+import {ClientesService} from '../../../Clientes/Services/clientes.service'
+import { ClientesData } from '../../../Clientes/Models/clientes-data';
+import { MatOption, MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+import { merge, fromEvent, startWith, switchMap, catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-detalles-pedidos',
@@ -24,57 +31,107 @@ import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-
     MatTableModule,
     MatSortModule,
     MatButtonModule,
-    MatPaginatorModule],
+    MatPaginatorModule,
+    MatSelectModule,
+    FormsModule,
+    CommonModule ],
   templateUrl: './detalles-pedidos.component.html',
   styleUrl: './detalles-pedidos.component.scss'
 })
 export class DetallesPedidosComponent implements OnInit{
-  title = 'Detalle pedidos de Usuario'
-  displayedColumns = ['pedido','cliente', 'producto','cantidad','precioUnitario', 'actions']
+  title = 'Detalle pedidos de Usuario';
+  displayedColumns = ['pedido', 'cliente', 'producto', 'cantidad', 'precioUnitario', 'actions'];
   dataSource: Item[] = [];
-  filter:DetalleSearchFilter;
-  isLoadingResults= false;
-  totalItems;
+  filter: DetalleSearchFilter;
+  isLoadingResults = false;
+  totalItems: number;
+  clientes: ClientesData[] = []; // Array de clientes
+  selectedCliente: number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
-  @ViewChild('input', {static: true}) filterInput:ElementRef | undefined;
+  @ViewChild('input', { static: true }) filterInput: ElementRef | undefined;
 
-  constructor(public dialog: MatDialog, private router: Router, private detalleService: DetalleService){
-    this.filter =new DetalleSearchFilter(0, 5, "id", "asc", "");
+  constructor(public dialog: MatDialog,
+    private router: Router,
+    private detalleService: DetalleService,
+    private clientesService: ClientesService) 
+    {
+    this.filter = new DetalleSearchFilter(0, 5, "id", "asc", "");
     this.dataSource = [] as Item[];
     this.totalItems = 0;
-  }
+    this.selectedCliente = 0;
+    }
 
   ngOnInit(): void {
     this.isLoadingResults = true;
-    this.detalleService.getAllPageable(this.filter)
-    .subscribe(
-      response => {
-        console.log(response);
-        this.totalItems = response.totalItems;
-        this.dataSource = response.items
-        
-        this.isLoadingResults = false;
-      },
-      error => {
-        this.isLoadingResults = false;
-        console.log("Ocurrio un error al recuperar los detalles del pedido =>", error);
-      }
+    this.loadClientes(); // Cargar clientes
+    this.loadDetalles(); // Cargar detalles inicialmente
+  }
+
+  loadClientes(): void {
+    // Llama al servicio para cargar los clientes
+    this.clientesService.getClientes().subscribe(
+      clientes => this.clientes = clientes,
+      error => console.log("Error al cargar clientes:", error)
     );
   }
-  editDetalle(detalle:DetalleData) {
-    this.router.navigate(['details/'+ detalle.detalleId]);
+
+  loadDetalles(): void {
+    if (this.selectedCliente !== null) {
+        this.isLoadingResults = true;
+        this.detalleService.getDetallesByCliente(this.selectedCliente, this.filter)
+            .subscribe(
+                response => {
+                    this.totalItems = response.totalElements;
+                    this.dataSource = response.content;  // Asignando los datos a la tabla
+                    this.isLoadingResults = false;
+                },
+                error => {
+                    this.isLoadingResults = false;
+                    console.error("Error al recuperar los detalles:", error);
+                }
+            );
+    }
+}
+  ngAfterViewInit() {
+    merge(this.sort!!.sortChange, this.paginator!!.page, fromEvent(this.filterInput?.nativeElement, 'keyup'))
+    .pipe(
+      startWith({}),
+      switchMap(() => {
+        this.isLoadingResults = true;
+        this.filter.pageNumber = this.paginator!!.pageIndex;
+        this.filter.pageSize = this.paginator!!.pageSize;
+        this.filter.columnOrder = this.sort!!.active;
+        this.filter.direction = this.sort!!.direction;
+        this.filter.filter = this.filterInput?.nativeElement.value.trim().toLowerCase();
+        return this.detalleService.getDetallesByCliente(this.selectedCliente,this.filter).pipe(catchError(() => of({content: [] as Item[]} as DetallePage)));
+      })
+    )
+    .subscribe(data => {
+      console.log(data.content);
+      this.dataSource = data.content;
+    }
+
+    );
+  }
+
+  onClienteChange(clienteId: number): void {
+    this.selectedCliente = clienteId;
+    this.loadDetalles(); 
+  }
+
+  editDetalle(detalle: DetalleData) {
+    this.router.navigate(['details/' + detalle.detalleId]);
   }
   
-  deleteDetalle(detalle:DetalleData) {
+  deleteDetalle(detalle: DetalleData) {
     let deleteDialogRef = this.dialog.open(ItemDialogComponent, {
       width: '300px',
       data: {
         title: 'Eliminar Detalle',
-        message:`Esta seguro que desea eliminar el registro detalle?`
+        message: `Esta seguro que desea eliminar el registro detalle?`
       },
-      
     });
   }
 }

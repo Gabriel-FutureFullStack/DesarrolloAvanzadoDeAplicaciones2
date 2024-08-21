@@ -26,6 +26,10 @@ export class ClientesService {
     getById(id: string): Observable<ClientesData>{
       return this.httpClient.get<ClientesData>(`${this.apiUrlBasePath}clientes/${id}`,this.httpOptions);
     }
+    
+    getClientes(): Observable<ClientesData[]> {
+      return this.httpClient.get<ClientesData[]>(`${this.apiUrlBasePath}clientes`, this.httpOptions);
+    }
     getAllPageable(filter: ClientesSearchFilter):Observable<ClientesPage>{
       let filterparams = new HttpParams()
       .set('pageNumber', filter.pageNumber)

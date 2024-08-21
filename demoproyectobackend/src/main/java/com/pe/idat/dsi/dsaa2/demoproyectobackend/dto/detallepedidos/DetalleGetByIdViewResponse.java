@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class DetalleGetByIdViewResponse {
     private Long detalleId;
-    private Long pedioID;
+    private Long pedioId;
     private String pedidoNombreCliente;
     private String productoNombre;
     private int cantidad;

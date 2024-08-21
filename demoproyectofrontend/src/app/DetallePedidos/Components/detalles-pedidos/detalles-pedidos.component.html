@@ -7,6 +7,15 @@
             placeholder="Realice su busqueda por nombre, apellidos, entre otros datos" #input>
     </mat-form-field>
 
+    <mat-form-field class="col-12">
+        <mat-label>Seleccione Cliente</mat-label>
+        <mat-select [(ngModel)]="selectedCliente" (selectionChange)="onClienteChange($event.value)">
+            <mat-option *ngFor="let cliente of clientes" [value]="cliente.clienteId">
+                {{ cliente.nombreCliente }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
 

@@ -29,6 +29,7 @@ export class DetallesPedidosEditComponent {
     this.detalle = { detalleId: 0 } as DetalleData;
     this.detalleForm = new FormGroup({
       cliente: new FormControl( '', [Validators.required]),
+      pedidoId: new FormControl( '', [Validators.required]),
       producto: new FormControl('', [Validators.required]),
       cantidad: new FormControl('', [Validators.required]),
       precio: new FormControl('', [Validators.required]),
@@ -49,6 +50,7 @@ export class DetallesPedidosEditComponent {
           this.detalle = response;
           this.detalleForm.patchValue({
             cliente: response.pedido.cliente?.nombreCliente || '',
+            pedidoId: response.pedido.pedidoId || '',
             producto: response.producto?.nombreProducto || '',
             cantidad: response.cantidad || '',
             precio: response.precioUnitario || ''

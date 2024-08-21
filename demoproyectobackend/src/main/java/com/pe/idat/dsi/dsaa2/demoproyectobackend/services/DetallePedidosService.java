@@ -59,8 +59,12 @@ public class DetallePedidosService {
         }
         return response.get();
     }
-
-
+    //Obtener detalle de pedidos segun el cliente
+    public Page<DetallePedidos> getDetallesByCliente(Long clienteId, DetallePageable pageable) {
+        Sort detalleSorting = Sort.by(pageable.getDirection().equals("asc") ? Direction.ASC : Direction.DESC, pageable.getColumnOrder());
+        Pageable detallePageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), detalleSorting);
+        return dPedidosRepository.findByPedido_Cliente_ClienteId(clienteId, detallePageable);
+    }
 
 
     public DetallePedidos insertDetalle(DetalleInsertRequest entity){

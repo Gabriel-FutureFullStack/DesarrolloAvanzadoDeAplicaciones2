@@ -20,5 +20,7 @@ public interface DetallePedidosRepository extends JpaRepository<DetallePedidos, 
 
     @Query("SELECT d FROM DetallePedidos d WHERE estado = '1' and (d.estado LIKE %:filter%)")
     Page<DetallePedidos> findAllPageableActiveDetalles(Pageable pageable, @Param("filter") String filter);
-
+    //Obtener de la bd solo los detalles segun el cliente
+    @Query("SELECT d FROM DetallePedidos d WHERE d.pedido.cliente.clienteId = :clienteId AND d.estado = '1'")
+    Page<DetallePedidos> findByPedido_Cliente_ClienteId(@Param("clienteId") Long clienteId, Pageable pageable);
 }

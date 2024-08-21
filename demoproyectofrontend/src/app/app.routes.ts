@@ -9,6 +9,7 @@ import { ProductosEditComponent } from './Productos/Components/productos-edit/pr
 import { ConfiguracionComponent } from './Config/Components/configuracion/configuracion.component';
 import { DetallesPedidosEditComponent } from './DetallePedidos/Components/detalles-pedidos-edit/detalles-pedidos-edit.component';
 
+
 export const routes: Routes = [
 
     {
@@ -35,6 +36,7 @@ export const routes: Routes = [
         path: 'details/:id',
         component: DetallesPedidosEditComponent
     },
+    
     {
         path: 'productos',
         component: ProductosComponent

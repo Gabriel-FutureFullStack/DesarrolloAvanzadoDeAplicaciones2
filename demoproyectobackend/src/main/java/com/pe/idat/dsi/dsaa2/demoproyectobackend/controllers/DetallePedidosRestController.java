@@ -50,6 +50,8 @@ public class DetallePedidosRestController {
         DetalleSorting sorting = new DetalleSorting(columnOrder, direction);
         return detallePedidosService.getAll(sorting);
     }
+
+    //Obtener todos los pedidos
     @GetMapping("/page")
     public ResponseEntity<DetallePageableResponse> getAllPageable(@RequestParam( required = false, defaultValue = "0") int pageNumber, 
                                                                 @RequestParam(required = false, defaultValue = "10") int pageSize,
@@ -75,6 +77,21 @@ public class DetallePedidosRestController {
         }
         return ResponseEntity.ok(DetalleGetByIDResponse.toDetalleGetByIDResponse(detalle));
     }
+    //Obtener pedidos segun el cliente
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<Page<DetallePedidos>> getDetallesByCliente(
+        @PathVariable Long clienteId,
+        @RequestParam( required = false, defaultValue = "0") int pageNumber, 
+        @RequestParam(required = false, defaultValue = "10") int pageSize,
+        @RequestParam( required = false, defaultValue = "asc") String direction, 
+        @RequestParam(required = false, defaultValue = "id") String columnOrder,
+        @RequestParam(required = false, defaultValue = "") String filter)   {
+
+        DetallePageable pageable = new DetallePageable(pageNumber, pageSize, columnOrder, direction, filter);
+        Page<DetallePedidos> detalles = detallePedidosService.getDetallesByCliente(clienteId, pageable);
+        return ResponseEntity.ok(detalles);
+    }
+
     
     /*@GetMapping("/{id}")
     public ResponseEntity<DetalleGetByIdViewResponse> getById(@PathVariable Long id) {

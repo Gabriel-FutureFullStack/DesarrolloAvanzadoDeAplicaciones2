@@ -9,7 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class DetalleUpdateResponse {
     private Long detalleId;
-    private Long pedido;
+    private Long pedidoId;
     private Long producto;
     private int cantidad;
     private double precioUnitario;
