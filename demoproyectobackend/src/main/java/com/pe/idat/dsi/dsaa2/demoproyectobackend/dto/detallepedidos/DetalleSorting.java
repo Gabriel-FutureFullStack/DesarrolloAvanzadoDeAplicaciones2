@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class DetalleSorting {
     private String columnOrder;
-    private String direcction;
+    private String direction;
 }

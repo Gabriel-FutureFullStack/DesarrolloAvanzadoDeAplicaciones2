@@ -53,5 +53,7 @@ export class DetalleService {
   update(detalle: DetalleData):Observable<DetalleData>{
     return this.httpdetalle.put<DetalleData>(`${this.apiUrlBasePath}detalle-pedidos/${detalle.detalleId}`, detalle, this.httpOptions);
   }
-
+  delet(id: number){
+    return this.httpdetalle.delete(`${this.apiUrlBasePath}detalle-pedidos/${id}`, {responseType: 'text', headers:this.httpOptions.headers});
+  }
 }

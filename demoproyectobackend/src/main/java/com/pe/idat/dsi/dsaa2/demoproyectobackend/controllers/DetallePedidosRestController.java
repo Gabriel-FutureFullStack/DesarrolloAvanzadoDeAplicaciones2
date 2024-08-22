@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleGetByIDResponse;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleGetByIdViewResponse;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetallePageable;

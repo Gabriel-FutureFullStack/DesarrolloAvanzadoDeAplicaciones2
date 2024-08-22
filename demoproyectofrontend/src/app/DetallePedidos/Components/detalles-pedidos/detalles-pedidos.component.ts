@@ -15,13 +15,11 @@ import { DetalleData } from '../../Models/detalle-data';
 import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-dialog.component';
 import {ClientesService} from '../../../Clientes/Services/clientes.service'
 import { ClientesData } from '../../../Clientes/Models/clientes-data';
-import { MatOption, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { merge, fromEvent, startWith, switchMap, catchError, of } from 'rxjs';
-import { response } from 'express';
-import { error } from 'console';
 
 @Component({
   selector: 'app-detalles-pedidos',
@@ -154,6 +152,22 @@ export class DetallesPedidosComponent implements OnInit {
         title: 'Eliminar Detalle',
         message: `Esta seguro que desea eliminar el registro detalle?`
       },
+    });
+    deleteDialogRef.afterClosed().subscribe(result => {
+      if(result.action === 'cancel'){
+        return;
+      }
+      this.detalleService.delet(detalle.detalleId).
+      subscribe(
+        response => {
+          console.log('El cliente ha sido eliminado correctamente', response);
+          //this.router.navigate(['/students'])
+          window.location.reload();
+        },
+        error => {
+          console.log('Error eliminando al cliente', error);
+        }
+      )
     });
   }
 }

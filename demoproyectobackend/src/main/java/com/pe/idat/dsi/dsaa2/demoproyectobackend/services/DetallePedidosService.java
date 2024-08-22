@@ -43,7 +43,7 @@ public class DetallePedidosService {
         return dPedidosRepository.findAll();
     }
     public List<DetallePedidos> getAll(DetalleSorting sorting){
-        Sort detalleSorting = Sort.by(sorting.getDirecction().equals("asc")? Direction.ASC:Direction.DESC, sorting.getColumnOrder());
+        Sort detalleSorting = Sort.by(sorting.getDirection().equals("asc")? Direction.ASC:Direction.DESC, sorting.getColumnOrder());
         return dPedidosRepository.findAllActiveDetalles(detalleSorting);
     
     }

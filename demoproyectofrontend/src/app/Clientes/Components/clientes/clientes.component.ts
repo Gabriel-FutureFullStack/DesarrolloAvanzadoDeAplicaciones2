@@ -105,7 +105,6 @@ export class ClientesComponent implements OnInit, AfterViewInit{
       subscribe(
         response => {
           console.log('El cliente ha sido eliminado correctamente', response);
-          //this.router.navigate(['/students'])
           window.location.reload();
         },
         error => {
@@ -113,7 +112,5 @@ export class ClientesComponent implements OnInit, AfterViewInit{
         }
       )
     });
-
-
-}
+  }
 }
