@@ -8,6 +8,9 @@ import { ProductosCreateComponent } from './Productos/Components/productos-creat
 import { ProductosEditComponent } from './Productos/Components/productos-edit/productos-edit.component';
 import { ConfiguracionComponent } from './Config/Components/configuracion/configuracion.component';
 import { DetallesPedidosEditComponent } from './DetallePedidos/Components/detalles-pedidos-edit/detalles-pedidos-edit.component';
+import { PedidosComponent } from './Pedidos/Components/pedidos/pedidos.component';
+import { PedidosCreateComponent } from './Pedidos/Components/pedidos-create/pedidos-create.component';
+import { PedidosEditComponent } from './Pedidos/Components/pedidos-edit/pedidos-edit.component';
 
 
 export const routes: Routes = [
@@ -48,6 +51,19 @@ export const routes: Routes = [
     {
         path: 'productos/:id',
         component: ProductosEditComponent
+    },
+
+    {
+        path: 'pedidos',
+        component: PedidosComponent
+    },
+    {
+        path: 'pedidos/new',
+        component: PedidosCreateComponent
+    },
+    {
+        path: 'pedidos/:id',
+        component: PedidosEditComponent
     },
 
 ];
