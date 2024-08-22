@@ -79,7 +79,7 @@ public class DetallePedidosRestController {
     }
     //Obtener pedidos segun el cliente
     @GetMapping("/cliente/{clienteId}")
-    public ResponseEntity<Page<DetallePedidos>> getDetallesByCliente(
+    public ResponseEntity<DetallePageableResponse> getDetallesByCliente(
         @PathVariable Long clienteId,
         @RequestParam( required = false, defaultValue = "0") int pageNumber, 
         @RequestParam(required = false, defaultValue = "10") int pageSize,
@@ -89,7 +89,10 @@ public class DetallePedidosRestController {
 
         DetallePageable pageable = new DetallePageable(pageNumber, pageSize, columnOrder, direction, filter);
         Page<DetallePedidos> detalles = detallePedidosService.getDetallesByCliente(clienteId, pageable);
-        return ResponseEntity.ok(detalles);
+        if(detalles == null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(DetallePageableResponse.toDetallePageableResponse(detalles));
     }
 
     

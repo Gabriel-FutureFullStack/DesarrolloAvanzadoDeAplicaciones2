@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { merge, fromEvent, startWith, switchMap, catchError, of } from 'rxjs';
+import { response } from 'express';
+import { error } from 'console';
 
 @Component({
   selector: 'app-detalles-pedidos',
@@ -38,7 +40,7 @@ import { merge, fromEvent, startWith, switchMap, catchError, of } from 'rxjs';
   templateUrl: './detalles-pedidos.component.html',
   styleUrl: './detalles-pedidos.component.scss'
 })
-export class DetallesPedidosComponent implements OnInit{
+export class DetallesPedidosComponent implements OnInit {
   title = 'Detalle pedidos de Usuario';
   displayedColumns = ['pedido', 'cliente', 'producto', 'cantidad', 'precioUnitario', 'actions'];
   dataSource: Item[] = [];
@@ -52,16 +54,17 @@ export class DetallesPedidosComponent implements OnInit{
   @ViewChild(MatSort) sort: MatSort | undefined;
   @ViewChild('input', { static: true }) filterInput: ElementRef | undefined;
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     private router: Router,
     private detalleService: DetalleService,
-    private clientesService: ClientesService) 
-    {
+    private clientesService: ClientesService
+  ) {
     this.filter = new DetalleSearchFilter(0, 5, "id", "asc", "");
     this.dataSource = [] as Item[];
     this.totalItems = 0;
     this.selectedCliente = 0;
-    }
+  }
 
   ngOnInit(): void {
     this.isLoadingResults = true;
@@ -78,53 +81,72 @@ export class DetallesPedidosComponent implements OnInit{
   }
 
   loadDetalles(): void {
-    if (this.selectedCliente !== null) {
-        this.isLoadingResults = true;
-        this.detalleService.getDetallesByCliente(this.selectedCliente, this.filter)
-            .subscribe(
-                response => {
-                    this.totalItems = response.totalElements;
-                    this.dataSource = response.content;  // Asignando los datos a la tabla
-                    this.isLoadingResults = false;
-                },
-                error => {
-                    this.isLoadingResults = false;
-                    console.error("Error al recuperar los detalles:", error);
-                }
-            );
+    this.isLoadingResults = true;
+    if (this.selectedCliente === 0) {
+      this.detalleService.getAllPageable(this.filter)
+        .subscribe(response => {
+            this.totalItems = response.totalItems;
+            this.dataSource = response.items;
+            this.isLoadingResults = false;
+          },
+          error => {
+            this.isLoadingResults = false;
+            console.error("Error al recuperar los detalles:", error);
+          }
+        );
+    } else {
+      // Si se ha seleccionado un cliente, se filtran los detalles por cliente
+      this.detalleService.getDetallesByCliente(this.selectedCliente, this.filter)
+        .subscribe(
+          response => {
+            this.totalItems = response.totalItems;
+            this.dataSource = response.items;
+            this.isLoadingResults = false;
+          },
+          error => {
+            this.isLoadingResults = false;
+            console.error("Error al recuperar los detalles:", error);
+          }
+        );
     }
-}
+  }
+
   ngAfterViewInit() {
     merge(this.sort!!.sortChange, this.paginator!!.page, fromEvent(this.filterInput?.nativeElement, 'keyup'))
-    .pipe(
-      startWith({}),
-      switchMap(() => {
-        this.isLoadingResults = true;
-        this.filter.pageNumber = this.paginator!!.pageIndex;
-        this.filter.pageSize = this.paginator!!.pageSize;
-        this.filter.columnOrder = this.sort!!.active;
-        this.filter.direction = this.sort!!.direction;
-        this.filter.filter = this.filterInput?.nativeElement.value.trim().toLowerCase();
-        return this.detalleService.getDetallesByCliente(this.selectedCliente,this.filter).pipe(catchError(() => of({content: [] as Item[]} as DetallePage)));
-      })
-    )
-    .subscribe(data => {
-      console.log(data.content);
-      this.dataSource = data.content;
-    }
-
-    );
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          this.filter.pageNumber = this.paginator!!.pageIndex;
+          this.filter.pageSize = this.paginator!!.pageSize;
+          this.filter.columnOrder = this.sort!!.active;
+          this.filter.direction = this.sort!!.direction;
+          this.filter.filter = this.filterInput?.nativeElement.value.trim().toLowerCase();
+          if (this.selectedCliente === 0) {
+            return this.detalleService.getAllPageable(this.filter)
+              .pipe(catchError(() => of({ items: [] as Item[] } as DetallePage)));
+          } else {
+            // Si se selecciona un cliente, se filtran los detalles por cliente
+            return this.detalleService.getDetallesByCliente(this.selectedCliente, this.filter)
+              .pipe(catchError(() => of({ items: [] as Item[] } as DetallePage)));
+          }
+        })
+      )
+      .subscribe(data => {
+        console.log(data.items);
+        this.dataSource = data.items;
+      });
   }
 
   onClienteChange(clienteId: number): void {
     this.selectedCliente = clienteId;
-    this.loadDetalles(); 
+    this.loadDetalles();
   }
 
   editDetalle(detalle: DetalleData) {
     this.router.navigate(['details/' + detalle.detalleId]);
   }
-  
+
   deleteDetalle(detalle: DetalleData) {
     let deleteDialogRef = this.dialog.open(ItemDialogComponent, {
       width: '300px',
