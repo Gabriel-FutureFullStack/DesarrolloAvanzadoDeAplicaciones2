@@ -1,26 +1,16 @@
-<<<<<<< HEAD
-import { Injectable } from '@angular/core';
-=======
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProveedoresData } from '../Models/proveedores-data';
 import { ProveedoresSearchFilter } from '../Models/proveedores-search-filter';
 import { ProveedoresPage } from '../Models/proveedores-page';
->>>>>>> tavo
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProveedoresService {
-<<<<<<< HEAD
-
-  constructor() { }
-=======
   apiUrlBasePath = "http://localhost:8080/api/v1/";
   httpOptions;
-
-
   constructor(private httpClient: HttpClient) {
     this.httpOptions = {
       headers: new HttpHeaders(
@@ -61,5 +51,4 @@ export class ProveedoresService {
    }
   
    
->>>>>>> tavo
 }

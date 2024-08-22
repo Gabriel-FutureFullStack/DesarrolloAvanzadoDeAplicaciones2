@@ -36,6 +36,7 @@ export class AppComponent {
     let menu: Menu[]=[
       new Menu('Clientes', 'clients', 'groups'),
       new Menu('Productos', 'productos', 'inventory'),
+      new Menu('Servicios', 'services', 'linked_services'),
       new Menu('Pedidos', 'pedidos', 'local_shipping'),
       new Menu('Detalle de Pedidos', 'details', 'shopping_cart'),
       new Menu('Proveedores', 'proveedores', 'business'),
