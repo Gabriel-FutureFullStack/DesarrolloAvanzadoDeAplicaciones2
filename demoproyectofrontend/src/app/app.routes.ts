@@ -11,6 +11,12 @@ import { DetallesPedidosEditComponent } from './DetallePedidos/Components/detall
 import { PedidosComponent } from './Pedidos/Components/pedidos/pedidos.component';
 import { PedidosCreateComponent } from './Pedidos/Components/pedidos-create/pedidos-create.component';
 import { PedidosEditComponent } from './Pedidos/Components/pedidos-edit/pedidos-edit.component';
+<<<<<<< HEAD
+=======
+import { ProveedoresComponent } from './Proveedores/Components/proveedores/proveedores.component';
+import { ProveedoresCreateComponent } from './Proveedores/Components/proveedores-create/proveedores-create.component';
+import { ProveedoresEditComponent } from './Proveedores/Components/proveedores-edit/proveedores-edit.component';
+>>>>>>> tavo
 
 
 export const routes: Routes = [
@@ -65,5 +71,20 @@ export const routes: Routes = [
         path: 'pedidos/:id',
         component: PedidosEditComponent
     },
+<<<<<<< HEAD
+=======
+    {
+        path: 'proveedores',
+        component: ProveedoresComponent
+    },
+    {
+        path: 'proveedores/new',
+        component: ProveedoresCreateComponent
+    },
+    {
+        path: 'proveedores/:id',
+        component: ProveedoresEditComponent
+    },
+>>>>>>> tavo
 
 ];

@@ -38,6 +38,7 @@ export class AppComponent {
       new Menu('Productos', 'productos', 'inventory'),
       new Menu('Pedidos', 'pedidos', 'local_shipping'),
       new Menu('Detalle de Pedidos', 'details', 'shopping_cart'),
+      new Menu('Proveedores', 'proveedores', 'business'),
     ];
     return menu;
   }
