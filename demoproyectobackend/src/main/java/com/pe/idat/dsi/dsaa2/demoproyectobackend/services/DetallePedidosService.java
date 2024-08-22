@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,16 +30,17 @@ public class DetallePedidosService {
     private PedidosService pedidosService;
     private ProductosService productosService;
     @Autowired
-    public DetallePedidosService( PedidosService pedidosService, ProductosService productosService, DetallePedidosRepository dPedidosRepository){
+    public DetallePedidosService( @Lazy PedidosService pedidosService, ProductosService productosService, DetallePedidosRepository dPedidosRepository){
         
-        this.pedidosService = pedidosService;
         this.productosService = productosService;
         this.dPedidosRepository =dPedidosRepository;
+        this.pedidosService = pedidosService;
     }
 
     public DetallePedidosService(DetallePedidosRepository dPedidosRepository){
         this.dPedidosRepository = dPedidosRepository;
     }
+    
     public List<DetallePedidos> getAll() {
         return dPedidosRepository.findAll();
     }

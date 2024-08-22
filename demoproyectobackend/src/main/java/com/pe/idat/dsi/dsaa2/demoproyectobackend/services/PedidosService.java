@@ -29,10 +29,12 @@ public class PedidosService {
     private DetallePedidosService detallePedidosService; // Asegúrate de que esto esté inyectado correctamente
 
     @Autowired
-    public PedidosService(PedidosRepository peRepository, ClientesService clientesService){
+    public PedidosService(PedidosRepository peRepository, ClientesService clientesService, DetallePedidosService detallePedidosService){
         this.peRepository = peRepository;
         this.clientesService = clientesService;
+        this.detallePedidosService = detallePedidosService;
     }
+    
     public PedidosService(DetallePedidosService detallePedidosService){
         this.detallePedidosService = detallePedidosService;
     }
