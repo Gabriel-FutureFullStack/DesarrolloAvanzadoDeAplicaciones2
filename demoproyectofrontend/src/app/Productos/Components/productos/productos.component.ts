@@ -112,7 +112,5 @@ export class ProductosComponent implements OnInit, AfterViewInit{
         }
       )
     });
-
-
-}
+  }
 }

@@ -1,1 +1,27 @@
-<p>servicios-create works!</p>
+<h4>{{title}}</h4>
+
+<form [formGroup]="servicesForm" (ngSubmit)="onServiciosCreateSubmit()">
+
+  <div class="row">
+    <mat-form-field class="col-12 col-sm-6 p-2" appearance="outline">
+      <mat-label>Servicio</mat-label>
+      <input matInput placeholder="Ingrese nombre del servicio..." formControlName="nombreServicio" required />
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-sm-6 p-2" appearance="outline">
+      <mat-label>Descripcion</mat-label>
+      <input matInput placeholder="Ingrese descripcion del servicio..."  formControlName="descripcion" required/>
+    </mat-form-field>
+
+    <mat-form-field class="col-12 col-sm-6 p-2" appearance="outline">
+      <mat-label>Precio</mat-label>
+      <input matInput [type]="'number'" placeholder="Ingrese precio del servicio..."  formControlName="precio" required />
+    </mat-form-field>
+    
+
+  </div>
+  <div class="d-flex justify-content-end">
+    <button class="m-2" mat-button [routerLink]="['/services']">Cancelar</button>
+    <button type="submit" class="mt-2 mb-2" mat-flat-button>Registrar Servicio</button>
+  </div>
+</form>
