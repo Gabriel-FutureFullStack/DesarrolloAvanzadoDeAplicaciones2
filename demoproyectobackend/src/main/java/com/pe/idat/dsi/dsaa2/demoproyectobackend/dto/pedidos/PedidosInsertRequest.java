@@ -14,7 +14,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class PedidosInsertRequest {
     private Long pedidoId;
-    private Clientes cliente;
+    private Long clienteID;
     private Date fecha;
     private double total;
     private String estado;

@@ -1,6 +1,6 @@
 package com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.pedidos;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.DetallePedidos;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Pedidos;
 import java.util.Date;
 import lombok.AllArgsConstructor;

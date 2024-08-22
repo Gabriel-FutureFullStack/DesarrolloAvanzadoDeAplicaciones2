@@ -37,7 +37,7 @@ public class ProductosRestController {
         this.productosService = productosService;
     }
 
-     @GetMapping()
+    @GetMapping()
     public List<Productos> getAll(@RequestParam(defaultValue = "id", required = false) String columnOrder, @RequestParam(defaultValue = "asc", required = false) String direction) {
         ProductosSorting sorting = new ProductosSorting(columnOrder, direction);
         return productosService.getAll(sorting);

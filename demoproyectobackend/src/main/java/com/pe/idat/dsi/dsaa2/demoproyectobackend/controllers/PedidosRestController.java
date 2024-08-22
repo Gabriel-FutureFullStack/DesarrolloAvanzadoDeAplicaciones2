@@ -114,7 +114,7 @@ public class PedidosRestController {
         }
     }
 
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public ResponseEntity<PedidosUpdateResponse> updatePedidos(@PathVariable Long id, @RequestBody PedidosUpdateRequest entity) {
         entity.setPedidoId(id);
 
@@ -132,6 +132,6 @@ public class PedidosRestController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok( "El pedido ha sido eliminado correctamente");
-    } 
+    } */
     
 }

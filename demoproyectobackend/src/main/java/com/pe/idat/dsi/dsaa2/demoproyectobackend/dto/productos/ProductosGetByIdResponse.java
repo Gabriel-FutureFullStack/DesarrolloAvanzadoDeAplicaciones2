@@ -10,7 +10,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ProductosGetByIdResponse {
 
-    private Long productoId;
+    private Long servicioId;
     private String nombreProducto;
     private String descripcion;
     private double precio;

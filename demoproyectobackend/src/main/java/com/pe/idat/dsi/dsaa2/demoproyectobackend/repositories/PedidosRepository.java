@@ -15,7 +15,7 @@ import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Pedidos;
 @Repository
 public interface PedidosRepository extends JpaRepository<Pedidos, Long>{
 
-        @Query(value = " SELECT pe FROM Pedidos  pe WHERE pe.estado = '1' ")
+    @Query(value = " SELECT pe FROM Pedidos  pe WHERE pe.estado = '1' ")
     List<Pedidos> findAllActivePedidos(Sort sorting);
 
     @Query("SELECT pe FROM Pedidos pe WHERE estado = '1' and (pe.estado LIKE %:filter%)")
