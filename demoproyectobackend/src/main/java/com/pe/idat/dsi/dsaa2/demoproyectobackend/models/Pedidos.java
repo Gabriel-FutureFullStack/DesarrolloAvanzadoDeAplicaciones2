@@ -43,5 +43,15 @@ public class Pedidos {
         this.total = total;
     }
 
+    public Pedidos updatePropierties(Pedidos model)
+    {
+        cliente = model.cliente;
+        fecha = model.fecha;
+        total = model.total;
+
+        return this;
+
+    }
+
     
 }
