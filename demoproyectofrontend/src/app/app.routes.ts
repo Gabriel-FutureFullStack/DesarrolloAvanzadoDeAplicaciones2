@@ -16,6 +16,7 @@ import { ProveedoresCreateComponent } from './proveedores/Components/proveedores
 import { ServiciosComponent } from './Servicios/Components/servicios/servicios.component';
 import { ServiciosCreateComponent } from './Servicios/Components/servicios-create/servicios-create.component';
 import { ServiciosEditComponent } from './Servicios/Components/servicios-edit/servicios-edit.component';
+import { ProveedoresEditComponent } from './proveedores/Components/proveedores-edit/proveedores-edit.component';
 
 
 export const routes: Routes = [
@@ -92,7 +93,7 @@ export const routes: Routes = [
     },
     {
         path: 'proveedores/:id',
-        component: ProductosEditComponent
+        component: ProveedoresEditComponent
     },
 
 ];

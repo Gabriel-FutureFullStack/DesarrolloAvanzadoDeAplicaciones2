@@ -18,7 +18,7 @@ public interface ClientesRepository extends JpaRepository<Clientes, Long> {
     @Query(value = " SELECT c FROM Clientes c WHERE c.estado = '1' ")
     List<Clientes> findAllActiveClientes(Sort sorting);
 
-    @Query("SELECT c FROM Clientes c WHERE estado = '1' and (c.nombreCliente LIKE %:filter% OR c.direccion LIKE %:filter% OR c.email LIKE %:filter%)")
+    @Query("SELECT c FROM Clientes c WHERE estado = '1' and (c.nombreCliente LIKE %:filter% OR c.direccion LIKE %:filter% OR c.email LIKE %:filter% OR c.telefono LIKE %:filter%)")
     Page<Clientes> findAllPageableActiveClientes(Pageable pageable, @Param("filter") String filter);
  
     @Query(value = " SELECT * FROM Clientes c WHERE c.estado = '0' ", nativeQuery = true)

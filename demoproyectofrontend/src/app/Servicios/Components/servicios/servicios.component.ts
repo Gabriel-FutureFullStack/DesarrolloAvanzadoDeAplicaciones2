@@ -10,7 +10,6 @@ import { Router, RouterModule } from '@angular/router';
 import { Item, ServiciosPage } from '../../models/services-page';
 import { ServiciosSearchFilter } from '../../models/services-search-filter';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductosSearchFilter } from '../../../Productos/Models/productos-search-filter';
 import { ServiciosService } from '../../Services/servicios.service';
 import { merge, fromEvent, startWith, switchMap, catchError, of } from 'rxjs';
 import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-dialog.component';
@@ -43,7 +42,7 @@ export class ServiciosComponent {
   @ViewChild('input', {static: true}) filterInput:ElementRef | undefined;
 
   constructor(public dialog: MatDialog, private router: Router, private serviciosService: ServiciosService) {
-    this.filter =new ProductosSearchFilter(0, 5, "id", "asc", "");
+    this.filter =new ServiciosSearchFilter(0, 5, "id", "asc", "");
     this.dataSource = [] as Item[];
     this.totalItems = 0;
   }

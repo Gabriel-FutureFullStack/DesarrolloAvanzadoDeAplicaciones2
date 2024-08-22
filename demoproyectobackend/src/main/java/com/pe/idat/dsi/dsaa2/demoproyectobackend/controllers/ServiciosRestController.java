@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.productos.ProductosUpdateRequest;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.productos.ProductosUpdateResponse;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosGetByIdResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosInsertResponse;
@@ -25,7 +24,7 @@ import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosPageable
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosSorting;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosUpdateRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.servicios.ServiciosUpdateResponse;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Productos;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Servicios;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.ServiciosService;
 

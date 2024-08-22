@@ -18,7 +18,7 @@ public interface ProveedoresRepository extends JpaRepository<Proveedores, Long> 
     @Query(value = " SELECT pro FROM Proveedores pro WHERE pro.estado = '1' ")
     List<Proveedores> findAllActiveProveedores(Sort sorting);
 
-    @Query("SELECT pro FROM Proveedores pro WHERE estado = '1' and (pro.nombreProveedor LIKE %:filter% OR pro.direccion LIKE %:filter% OR pro.email LIKE %:filter%)")
+    @Query("SELECT pro FROM Proveedores pro WHERE estado = '1' and (pro.nombreProveedor LIKE %:filter% OR pro.direccion LIKE %:filter% OR pro.email LIKE %:filter% OR pro.telefono LIKE %:filter%)")
     Page<Proveedores> findAllPageableActiveProveedores(Pageable pageable, @Param("filter") String filter);
  
     @Query(value = " SELECT * FROM Proveedores pro WHERE pro.estado = '0' ", nativeQuery = true)

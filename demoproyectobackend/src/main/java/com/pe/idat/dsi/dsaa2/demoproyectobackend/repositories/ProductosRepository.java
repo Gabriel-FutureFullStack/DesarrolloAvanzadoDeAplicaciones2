@@ -17,7 +17,7 @@ public interface ProductosRepository extends JpaRepository<Productos, Long>{
     @Query(value = " SELECT p FROM Productos p WHERE p.estado = '1' ")
     List<Productos> findAllActiveProductos(Sort sorting);
 
-    @Query("SELECT p FROM Productos p WHERE estado = '1' and (p.nombreProducto LIKE %:filter%)")
+    @Query("SELECT p FROM Productos p WHERE estado = '1' and (p.nombreProducto LIKE %:filter% OR p.descripcion LIKE %:filter%)")
     Page<Productos> findAllPageableActiveProductos(Pageable pageable, @Param("filter") String filter);
 
     

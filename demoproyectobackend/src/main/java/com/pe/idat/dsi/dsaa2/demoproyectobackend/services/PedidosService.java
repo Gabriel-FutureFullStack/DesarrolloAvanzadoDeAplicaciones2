@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,28 +14,30 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleUpdateRequest;
+import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.detallepedidos.DetalleInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.pedidos.PedidosInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.pedidos.PedidosPageable;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.pedidos.PedidosSorting;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Clientes;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.DetallePedidos;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Pedidos;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Productos;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.repositories.PedidosRepository;
 
 @Service
 public class PedidosService {
-
-    private ClientesService clientesService;
     private PedidosRepository peRepository;
-    
-    
+    private ClientesService clientesService;
+    private DetallePedidosService detallePedidosService; // Asegúrate de que esto esté inyectado correctamente
+
+    @Autowired
     public PedidosService(PedidosRepository peRepository, ClientesService clientesService){
         this.peRepository = peRepository;
         this.clientesService = clientesService;
     }
-
+    public PedidosService(DetallePedidosService detallePedidosService){
+        this.detallePedidosService = detallePedidosService;
+    }
+   
+   
 
     public List<Pedidos> getAll() {
         return peRepository.findAll();
@@ -61,7 +64,7 @@ public class PedidosService {
 
     public Pedidos insertPedidos(PedidosInsertRequest entity){
         // Obtén el cliente usando el servicio
-        Clientes cliente = clientesService.getById(entity.getClienteID());
+        Clientes cliente = clientesService.getById(entity.getClienteId());
         // Verifica que cliente no sea null
         if (cliente == null) {
             return null;
@@ -80,9 +83,13 @@ public class PedidosService {
         // Guarda el detalle en la base de datos
         Pedidos response = peRepository.saveAndFlush(pedido);
 
-        // Verifica si el detalle se guardó correctamente
+        // Verifica si el pedido se guardó correctamente
         if (response.getPedidoId() == null || response.getPedidoId() == 0) {
             return null;
+        }
+        for (DetalleInsertRequest detalleRequest : entity.getDetalles()) {
+            detalleRequest.setPedidoId(pedido.getPedidoId());// Establece el ID del pedido en cada detalle
+            detallePedidosService.insertDetalle(detalleRequest); // Inserta el detalle
         }
 
         return response;

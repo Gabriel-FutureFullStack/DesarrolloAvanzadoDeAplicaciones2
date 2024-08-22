@@ -18,7 +18,7 @@ public interface ServiciosRepository extends JpaRepository<Servicios, Long>{
     @Query(value = " SELECT s FROM Servicios s WHERE s.estado = '1' ")
     List<Servicios> findAllActiveServicios(Sort sorting);
 
-    @Query("SELECT s FROM Servicios s WHERE s.estado = '1' and (s.nombreServicio LIKE %:filter%)")
+    @Query("SELECT s FROM Servicios s WHERE s.estado = '1' and (s.nombreServicio LIKE %:filter% OR s.descripcion LIKE %:filter% )")
     Page<Servicios> findAllPageableActiveServicios(Pageable pageable, @Param("filter") String filter);
  
     @Query(value = " SELECT * FROM Servicios s WHERE s.estado = '0' ", nativeQuery = true)

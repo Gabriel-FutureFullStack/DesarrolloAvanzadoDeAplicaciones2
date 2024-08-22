@@ -15,15 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesGetByIdResponse;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesInsertRequest;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesInsertResponse;
 
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageable;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesPageableResponse;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesSorting;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesUpdateRequest;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.clientes.ClientesUpdateResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresGetByIdResponse;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresInsertRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresInsertResponse;
@@ -32,9 +24,9 @@ import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresPage
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresSorting;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresUpdateRequest;
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.dto.proveedores.ProveedoresUpdateResponse;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Clientes;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.models.Proveedores;
-import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.ClientesService;
+
 import com.pe.idat.dsi.dsaa2.demoproyectobackend.services.ProveedoresService;
 
 

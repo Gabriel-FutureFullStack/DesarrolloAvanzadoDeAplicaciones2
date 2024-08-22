@@ -118,8 +118,7 @@ public class DetallePedidosService {
         return entityToUpdate;
     }
     public boolean deleteDetalle(Long id){
-        //dPedidosRepository.deleteById(id);
-        //return true;
+        
         //Eliminacion Logica para no afectar a las tablas relacionadas
         Optional<DetallePedidos> optionalDetalle = dPedidosRepository.findById(id);
 
