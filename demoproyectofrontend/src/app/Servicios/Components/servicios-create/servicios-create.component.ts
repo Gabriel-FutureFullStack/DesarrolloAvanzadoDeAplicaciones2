@@ -4,9 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
-import { ProductosService } from '../../../Productos/Services/productos.service';
 import { ServiciosService } from '../../Services/servicios.service';
 import { ServiciosData } from '../../models/servicios-data';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-servicios-create',
@@ -17,7 +17,8 @@ import { ServiciosData } from '../../models/servicios-data';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule, 
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   templateUrl: './servicios-create.component.html',
   styleUrl: './servicios-create.component.scss'

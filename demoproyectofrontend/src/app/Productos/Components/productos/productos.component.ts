@@ -14,6 +14,7 @@ import { ProductosService } from '../../Services/productos.service';
 import { catchError, fromEvent, merge, of, startWith, switchMap } from 'rxjs';
 import { ProductosData } from '../../Models/productos-data';
 import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-productos',
@@ -25,7 +26,8 @@ import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-
             MatTableModule,
             MatSortModule,
             MatButtonModule,
-            MatPaginatorModule],
+            MatPaginatorModule,
+            MatCardModule],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.scss',
   providers: [ProductosService]

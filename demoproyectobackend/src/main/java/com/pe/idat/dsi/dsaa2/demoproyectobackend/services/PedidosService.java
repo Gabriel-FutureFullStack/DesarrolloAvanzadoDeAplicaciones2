@@ -90,8 +90,9 @@ public class PedidosService {
             return null;
         }
         for (DetalleInsertRequest detalleRequest : entity.getDetalles()) {
-            detalleRequest.setPedidoId(pedido.getPedidoId());// Establece el ID del pedido en cada detalle
-            detallePedidosService.insertDetalle(detalleRequest); // Inserta el detalle
+            // Establece el ID del pedido en cada detalle
+            detalleRequest.setPedidoId(pedido.getPedidoId());
+            detallePedidosService.insertDetalle(detalleRequest); 
         }
 
         return response;

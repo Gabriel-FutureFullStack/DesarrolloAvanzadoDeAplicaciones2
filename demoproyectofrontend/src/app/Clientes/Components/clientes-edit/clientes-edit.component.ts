@@ -6,6 +6,7 @@ import {MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ClientesData } from '../../Models/clientes-data';
 import { ClientesService } from '../../Services/clientes.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-clientes-edit',
@@ -15,7 +16,8 @@ import { ClientesService } from '../../Services/clientes.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule, 
-    MatButtonModule],
+    MatButtonModule,
+    MatCardModule],
   templateUrl: './clientes-edit.component.html',
   styleUrl: './clientes-edit.component.scss'
 })

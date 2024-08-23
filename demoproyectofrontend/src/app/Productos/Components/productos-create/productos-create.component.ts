@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { ProductosService } from '../../Services/productos.service';
 import { ProductosData } from '../../Models/productos-data';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-productos-create',
@@ -15,7 +16,8 @@ import { ProductosData } from '../../Models/productos-data';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule, 
-    MatButtonModule],
+    MatButtonModule,
+    MatCardModule],
   templateUrl: './productos-create.component.html',
   styleUrl: './productos-create.component.scss'
 })

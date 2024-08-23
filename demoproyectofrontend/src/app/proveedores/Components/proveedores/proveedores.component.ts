@@ -14,6 +14,7 @@ import { ProveedoresService } from '../../Services/proveedores.service';
 import { ProveedoresSearchFilter } from '../../Models/proveedores-search-filter';
 import { ProveedoresPage, Item } from '../../Models/proveedores-page';
 import { ProveedoresData } from '../../Models/proveedores-data';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
@@ -26,7 +27,8 @@ import { ProveedoresData } from '../../Models/proveedores-data';
     MatTableModule,
     MatSortModule,
     MatButtonModule,
-    MatPaginatorModule],
+    MatPaginatorModule,
+    MatCardModule],
   templateUrl: './proveedores.component.html',
   styleUrl: './proveedores.component.scss',
   providers: [ProveedoresService]

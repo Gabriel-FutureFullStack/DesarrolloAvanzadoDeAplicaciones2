@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductosData } from '../../Models/productos-data';
 import { ProductosService } from '../../Services/productos.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-productos-edit',
@@ -15,7 +16,8 @@ import { ProductosService } from '../../Services/productos.service';
             ReactiveFormsModule,
             MatFormFieldModule,
             MatInputModule, 
-            MatButtonModule],
+            MatButtonModule,
+            MatCardModule],
   templateUrl: './productos-edit.component.html',
   styleUrl: './productos-edit.component.scss'
 })

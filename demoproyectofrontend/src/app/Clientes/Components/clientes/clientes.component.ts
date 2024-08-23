@@ -14,6 +14,7 @@ import { ClientesService } from '../../Services/clientes.service';
 import { ClientesData } from '../../Models/clientes-data';
 import { catchError, fromEvent, merge, of, startWith, switchMap } from 'rxjs';
 import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-dialog.component';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
@@ -26,7 +27,8 @@ import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-
     MatTableModule,
     MatSortModule,
     MatButtonModule,
-    MatPaginatorModule],
+    MatPaginatorModule,
+    MatCardModule],
   templateUrl: './clientes.component.html',
   styleUrl: './clientes.component.scss',
   providers: [ClientesService]

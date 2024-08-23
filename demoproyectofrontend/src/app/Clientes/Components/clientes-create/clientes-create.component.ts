@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,6 +6,8 @@ import {MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { ClientesService } from '../../Services/clientes.service';
 import { ClientesData } from '../../Models/clientes-data';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-clientes-create',
@@ -15,14 +17,22 @@ import { ClientesData } from '../../Models/clientes-data';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule, 
-    MatButtonModule],
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
+  ],
   templateUrl: './clientes-create.component.html',
   styleUrl: './clientes-create.component.scss'
 })
 export class ClientesCreateComponent {
+  hide = signal(true);
   clientesForm: FormGroup;
   title= "Agregar Cliente";
 
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
   constructor(private router: Router, private clientesService:ClientesService){
     this.clientesForm = new FormGroup({
       nombreCliente: new FormControl( '', [Validators.required]),

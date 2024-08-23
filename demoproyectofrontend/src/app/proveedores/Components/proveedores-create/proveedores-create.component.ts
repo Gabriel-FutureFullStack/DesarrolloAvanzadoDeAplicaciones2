@@ -6,6 +6,7 @@ import {MatInputModule } from '@angular/material/input';
 import { Router, RouterModule } from '@angular/router';
 import { ProveedoresService } from '../../Services/proveedores.service';
 import { ProveedoresData } from '../../Models/proveedores-data';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-proveedores-create',
@@ -15,7 +16,8 @@ import { ProveedoresData } from '../../Models/proveedores-data';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule, 
-    MatButtonModule],
+    MatButtonModule,
+    MatCardModule],
   templateUrl: './proveedores-create.component.html',
   styleUrl: './proveedores-create.component.scss'
 })

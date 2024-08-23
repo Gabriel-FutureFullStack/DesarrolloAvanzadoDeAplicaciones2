@@ -6,6 +6,7 @@ import {MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProveedoresService } from '../../Services/proveedores.service';
 import { ProveedoresData } from '../../Models/proveedores-data';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-proveedores-edit',
@@ -15,7 +16,8 @@ import { ProveedoresData } from '../../Models/proveedores-data';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule, 
-    MatButtonModule],
+    MatButtonModule,
+    MatCardModule],
   templateUrl: './proveedores-edit.component.html',
   styleUrl: './proveedores-edit.component.scss'
 })

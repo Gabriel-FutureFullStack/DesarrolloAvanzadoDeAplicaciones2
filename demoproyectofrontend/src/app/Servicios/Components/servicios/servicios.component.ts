@@ -14,6 +14,7 @@ import { ServiciosService } from '../../Services/servicios.service';
 import { merge, fromEvent, startWith, switchMap, catchError, of } from 'rxjs';
 import { ItemDialogComponent } from '../../../CommonComponents/item-dialog/item-dialog.component';
 import { ServiciosData } from '../../models/servicios-data';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-servicios',
@@ -25,7 +26,8 @@ import { ServiciosData } from '../../models/servicios-data';
     MatTableModule,
     MatSortModule,
     MatButtonModule,
-    MatPaginatorModule],
+    MatPaginatorModule,
+    MatCardModule],
   templateUrl: './servicios.component.html',
   styleUrl: './servicios.component.scss'
 })
